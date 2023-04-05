@@ -40,12 +40,14 @@ namespace EmployeesAPI.Repositories
             }
         }
 
-        public Task<bool> UpdateAsync(EmployeeDto employeeDto)
+        public async Task<bool> UpdateAsync(EmployeeDto employeeDto)
         {
-            throw new NotImplementedException();
+            var response = await _container.ReplaceItemAsync<EmployeeDto>(employeeDto, employeeDto.Id, new PartitionKey(employeeDto.Department));
+
+            return response.StatusCode == HttpStatusCode.OK;
         }
 
-        public Task<bool> DeleteAsync(EmployeeDto employeeDto)
+        public async Task<bool> DeleteAsync(string id, string partitionKey)
         {
             throw new NotImplementedException();
         }        

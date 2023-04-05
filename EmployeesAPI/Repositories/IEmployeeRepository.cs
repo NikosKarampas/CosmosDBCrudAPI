@@ -10,6 +10,6 @@ namespace EmployeesAPI.Repositories
 
         Task<bool> UpdateAsync(EmployeeDto employeeDto);    
 
-        Task<bool> DeleteAsync(EmployeeDto employeeDto);            
+        Task<bool> DeleteAsync(string id, string partitionKey);            
     }
 }

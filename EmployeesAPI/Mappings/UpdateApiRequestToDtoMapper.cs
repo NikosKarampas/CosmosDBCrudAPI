@@ -11,8 +11,8 @@ namespace EmployeesAPI.Mappings
             {
                 Id = updateEmployeeRequest.Id,
                 Department = updateEmployeeRequest.Department,
-                Name = updateEmployeeRequest.Name,
-                Country = updateEmployeeRequest.Country
+                Name = updateEmployeeRequest.UpdateEmployeeRequestBody.Name,
+                Country = updateEmployeeRequest.UpdateEmployeeRequestBody.Country
             };
         }
     }

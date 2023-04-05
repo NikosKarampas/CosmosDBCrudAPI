@@ -12,6 +12,7 @@ namespace EmployeesAPI.Controllers
     public class EmployeesController : ControllerBase
     {
         private readonly IEmployeeRepository _employeeRepository;
+        
         public EmployeesController(IEmployeeRepository employeeRepository)
         {
             _employeeRepository = employeeRepository;
@@ -39,6 +40,22 @@ namespace EmployeesAPI.Controllers
                 return NotFound();
 
             return Ok(employeeDto.ToEmployeeResponse());
+        }
+
+        [HttpPut("{id:guid}/{partitionKey}")]        
+        public async Task<ActionResult<EmployeeResponse>> Update([FromMultiSource] UpdateEmployeeRequest updateEmployeeRequest)
+        {
+            var existingEmployee = await _employeeRepository.GetByIdAsync(updateEmployeeRequest.Id, 
+                updateEmployeeRequest.Department);
+            
+            if (existingEmployee is null)
+                return NotFound();
+
+            var updateEmployeeDto = updateEmployeeRequest.ToEmployeeDto();
+
+            await _employeeRepository.UpdateAsync(updateEmployeeDto);
+
+            return Ok(updateEmployeeDto.ToEmployeeResponse());
         }
     }
 }

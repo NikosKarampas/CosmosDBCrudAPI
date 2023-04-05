@@ -12,7 +12,7 @@ namespace EmployeesAPI.Controllers
     public class EmployeesController : ControllerBase
     {
         private readonly IEmployeeRepository _employeeRepository;
-        
+
         public EmployeesController(IEmployeeRepository employeeRepository)
         {
             _employeeRepository = employeeRepository;
@@ -56,6 +56,18 @@ namespace EmployeesAPI.Controllers
             await _employeeRepository.UpdateAsync(updateEmployeeDto);
 
             return Ok(updateEmployeeDto.ToEmployeeResponse());
+        }
+
+        [HttpDelete("{id}/{partitionKey}")]
+        [ProducesResponseType(204)]        
+        public async Task<IActionResult> Delete([FromRoute] string id, [FromRoute] string partitionKey)
+        {
+            bool deleted = await _employeeRepository.DeleteAsync(id, partitionKey);
+            
+            if (!deleted)
+                return NotFound();
+
+            return NoContent();
         }
     }
 }

@@ -49,7 +49,19 @@ namespace EmployeesAPI.Repositories
 
         public async Task<bool> DeleteAsync(string id, string partitionKey)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var response = await _container.DeleteItemAsync<EmployeeDto>(id, new PartitionKey(partitionKey));
+
+                return response.StatusCode == HttpStatusCode.NoContent;
+            }
+            catch (CosmosException cosmosExc)
+            {
+                if (cosmosExc.StatusCode == HttpStatusCode.NotFound)
+                    return false;
+                else
+                    throw cosmosExc;
+            }
         }        
     }
 }

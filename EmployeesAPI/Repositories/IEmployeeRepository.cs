@@ -8,8 +8,8 @@ namespace EmployeesAPI.Repositories
 
         Task<EmployeeDto?> GetByIdAsync(string id, string partitionKey);
 
-        Task<bool> UpdateAsync(EmployeeDto employeeDto);
+        Task<bool> UpdateAsync(EmployeeDto employeeDto);    
 
-        Task<bool> DeleteAsync(EmployeeDto employeeDto);
+        Task<bool> DeleteAsync(EmployeeDto employeeDto);            
     }
 }

@@ -5,7 +5,7 @@ namespace EmployeesAPI.Mappings
 {
     public static class DtoToApiResponseMapper
     {
-        public static EmployeeResponse ToEmployeeDto(this EmployeeDto employeeDto)
+        public static EmployeeResponse ToEmployeeResponse(this EmployeeDto employeeDto)
         {
             return new EmployeeResponse
             {

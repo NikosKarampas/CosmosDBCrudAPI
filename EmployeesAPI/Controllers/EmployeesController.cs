@@ -34,7 +34,7 @@ namespace EmployeesAPI.Controllers
         [HttpGet("{id}/{partitionKey}")]        
         public async Task<ActionResult<EmployeeResponse>> Get([FromRoute] string id, [FromRoute] string partitionKey)
         {
-            EmployeeDto? employeeDto = await _employeeRepository.GetByIdAsync(id, partitionKey);
+            EmployeeDto employeeDto = await _employeeRepository.GetByIdAsync(id, partitionKey);
 
             if (employeeDto is null)
                 return NotFound();

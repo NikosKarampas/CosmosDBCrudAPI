@@ -6,7 +6,7 @@ namespace EmployeesAPI.Repositories
     {
         Task<bool> CreateAsync(EmployeeDto employeeDto);
 
-        Task<EmployeeDto?> GetByIdAsync(string id, string partitionKey);
+        Task<EmployeeDto> GetByIdAsync(string id, string partitionKey);
 
         Task<bool> UpdateAsync(EmployeeDto employeeDto);    
 

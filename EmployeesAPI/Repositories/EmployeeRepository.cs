@@ -23,7 +23,7 @@ namespace EmployeesAPI.Repositories
             return response.StatusCode == HttpStatusCode.OK;
         }
 
-        public async Task<EmployeeDto?> GetByIdAsync(string id, string partitionKey)
+        public async Task<EmployeeDto> GetByIdAsync(string id, string partitionKey)
         {
             try
             {
